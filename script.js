@@ -1,68 +1,67 @@
-// Function
-function cancelCheck(input) {
-    if (input === null) {
-        alert("Registration cancelled");
-        return true;
-    }
-}
-
 function registrationForm() {
 
-    // Get user inputs using window prompt
-    let fullName = prompt("Enter your full name:");
-    let email = prompt("Enter your email address:");
-    let password = prompt("Enter your password:");
-    let confirmPassword = prompt("Confirm your password:");
-    let age = prompt("Enter your age:");
+    let fullName;
+    let email;
+    let password;
+    let confirmPassword;
+    let age;
 
-    // Full Name Validation (at least two words)
-    fullName = prompt("Enter your full name:");
-    if (cancelCheck(fullName)) return;
-    
-    while (fullName.trim().split(" ").length < 2) {
-        fullName = prompt("Full Name must contain at least two words");
-        break;
+    // Full Name
+    while (true) {
+        fullName = prompt("Enter your full name:");
+
+        if (fullName !== null && fullName.trim().split(" ").length >= 2) {
+            break;
+        }
+
+        alert("Full Name must contain at least two words");
     }
 
-    // Email Validation (basic format)
-    email = prompt("Enter your email address:");
-    if (cancelCheck(email)) return;
-    
-    while (!email.includes("@") || email.indexOf(".")) {
-        email = prompt("Must follow a valid email format (e.g. example@domain.com)");
-        break;
+    // Email
+    while (true) {
+        email = prompt("Enter your email address:");
+
+        if (email !== null && email.includes("@") && email.indexOf(".") !== -1) {
+            break;
+        }
+
+        alert("Must follow a valid email format (e.g. example@domain.com)");
     }
 
-    // Password Validation (minimum length)
-    password = prompt ("Enter your password:");
-    if (cancelCheck(password)) return;
-    
-    while (!/[!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>\/?]/.test(password)) {
-        password = prompt("Password must be at least 8 characters long");
-        break;
+    // Password
+    while (true) {
+        password = prompt("Enter your password:");
+
+        if (password !== null && password.length >= 8) {
+            break;
+        }
+
+        alert("Password must be at least 8 characters long");
     }
 
-    // Confirm Password Validation
-    confirmPassword = prompt("Confirm your password:");
-    if (cancelCheck(confirmPassword)) return;   
+    // Confirm Password
+    while (true) {
+        confirmPassword = prompt("Confirm your password:");
 
-    while (password !== confirmPassword)  {
-    confirmPassword = prompt("Passwords do not match. Try again");
-    break;
+        if (confirmPassword !== null && confirmPassword === password) {
+            break;
+        }
+
+        alert("Passwords do not match");
     }
 
-    // Age Validation
-    age = prompt("Enter your age:");
-    if (cancelCheck(age)) return;   
+    // Age
+    while (true) {
+        age = prompt("Enter your age:");
 
-    while (!age || Number(age) < 18) {
+        if (age !== null && Number(age) >= 18) {
+            break;
+        }
+
         alert("You must be 18 years or older");
-        break;
     }
 
-    // Success message (only runs if all checks pass)
     alert("Registration successful! Welcome " + fullName);
 }
 
-// Call the function
 registrationForm();
